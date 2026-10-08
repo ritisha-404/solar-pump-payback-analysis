@@ -1,16 +1,14 @@
 # Solar Pump Payback Analysis
 
-A Databricks-based analytical project comparing the indicative economics of a
+A Databricks project comparing the economics of a
 5 kWp solar irrigation pump with a diesel pump across selected talukas in
 Pune district.
 
-> **Note:** This is an illustrative payback model. Cost, subsidy, operating,
-> and performance inputs are assumptions and should not be interpreted as a
-> site-specific engineering or financial feasibility study.
+This is an illustrative payback model. Please refrain from taking all details without cross-referencing source data.
 
 ## Objective
 
-The project estimates:
+The dashboard estimates and ilusrates:
 
 - Solar energy generation
 - Solar energy coverage of pump demand
@@ -19,9 +17,7 @@ The project estimates:
 - Farmer capital expenditure under a subsidy scenario
 - Indicative payback period with and without subsidy
 
-## Locations
-
-The analysis covers four talukas in Pune district:
+over four talukas in Pune:
 
 - Baramati
 - Indapur
@@ -33,17 +29,9 @@ The analysis covers four talukas in Pune district:
 Solar radiation data is obtained from the **NASA POWER API** and used to
 estimate solar energy generation for the selected locations.
 
-## Architecture
+## Dashboard
 
-```text
-NASA POWER API
-      ↓
-Bronze Layer
-      ↓
-Silver Layer
-      ↓
-Gold Analytical Table
-      ↓
-Databricks SQL
-      ↓
-Dashboard
+
+
+
+
