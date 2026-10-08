@@ -1,0 +1,559 @@
+{
+  "datasets": [
+    {
+      "name": "c686ce0b",
+      "displayName": "payback_by_taluka",
+      "queryLines": [
+        "   SELECT * FROM workspace.solar_pump.gold_payback"
+      ]
+    },
+    {
+      "name": "09bf4522",
+      "displayName": "headline",
+      "queryLines": [
+        "   SELECT min(payback_years) AS best_payback_years,\n",
+        "          max(payback_no_subsidy) AS worst_payback_no_subsidy\n",
+        "   FROM workspace.solar_pump.gold_payback"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "name": "3693cbf2",
+      "displayName": "solarr",
+      "layout": [
+        {
+          "widget": {
+            "name": "83c4309d",
+            "multilineTextboxSpec": {
+              "lines": [
+                "# Solar pump payback by taluka, Pune district\n",
+                "\n",
+                "#### Illustrative model: solar pump (5 kWp) vs diesel pump. All cost inputs are assumptions, see README."
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 12,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "best-subsidized-payback-years",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "09bf4522",
+                  "fields": [
+                    {
+                      "name": "sum(best_payback_years)",
+                      "expression": "SUM(`best_payback_years`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "Best subsidized payback (years)"
+              },
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(best_payback_years)"
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 6,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "worst-unsubsidized-payback",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "09bf4522",
+                  "fields": [
+                    {
+                      "name": "max(worst_payback_no_subsidy)",
+                      "expression": "MAX(`worst_payback_no_subsidy`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "Worst payback without subsidy (years)"
+              },
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "max(worst_payback_no_subsidy)",
+                  "rowNumber": 0
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 2,
+            "width": 6,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "payback-table",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "c686ce0b",
+                  "fields": [
+                    {
+                      "name": "taluka",
+                      "expression": "`taluka`"
+                    },
+                    {
+                      "name": "avg_ghi",
+                      "expression": "`avg_ghi`"
+                    },
+                    {
+                      "name": "kwh_per_day",
+                      "expression": "`kwh_per_day`"
+                    },
+                    {
+                      "name": "solar_coverage_pct",
+                      "expression": "`solar_coverage_pct`"
+                    },
+                    {
+                      "name": "annual_diesel_cost",
+                      "expression": "`annual_diesel_cost`"
+                    },
+                    {
+                      "name": "annual_saving",
+                      "expression": "`annual_saving`"
+                    },
+                    {
+                      "name": "farmer_capex",
+                      "expression": "`farmer_capex`"
+                    },
+                    {
+                      "name": "payback_years",
+                      "expression": "`payback_years`"
+                    },
+                    {
+                      "name": "payback_no_subsidy",
+                      "expression": "`payback_no_subsidy`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "All metrics by taluka"
+              },
+              "version": 2,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "taluka"
+                  },
+                  {
+                    "fieldName": "avg_ghi"
+                  },
+                  {
+                    "fieldName": "kwh_per_day"
+                  },
+                  {
+                    "fieldName": "solar_coverage_pct"
+                  },
+                  {
+                    "fieldName": "annual_diesel_cost"
+                  },
+                  {
+                    "fieldName": "annual_saving"
+                  },
+                  {
+                    "fieldName": "farmer_capex"
+                  },
+                  {
+                    "fieldName": "payback_years"
+                  },
+                  {
+                    "fieldName": "payback_no_subsidy"
+                  }
+                ]
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 4,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "annual-saving-bar",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "c686ce0b",
+                  "fields": [
+                    {
+                      "name": "taluka",
+                      "expression": "`taluka`"
+                    },
+                    {
+                      "name": "sum(annual_saving)",
+                      "expression": "SUM(`annual_saving`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "Annual saving by taluka"
+              },
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "taluka",
+                  "displayName": "taluka",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(annual_saving)",
+                  "displayName": "annual_saving",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "taluka",
+                  "displayName": "taluka",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 10,
+            "width": 6,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "solar-coverage-bar",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "c686ce0b",
+                  "fields": [
+                    {
+                      "name": "taluka",
+                      "expression": "`taluka`"
+                    },
+                    {
+                      "name": "sum(solar_coverage_pct)",
+                      "expression": "SUM(`solar_coverage_pct`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "Solar coverage % by taluka"
+              },
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "taluka",
+                  "displayName": "taluka",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(solar_coverage_pct)",
+                  "displayName": "solar_coverage_pct",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "taluka",
+                  "displayName": "taluka",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 10,
+            "width": 6,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "payback-no-subsidy-bar",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "c686ce0b",
+                  "fields": [
+                    {
+                      "name": "taluka",
+                      "expression": "`taluka`"
+                    },
+                    {
+                      "name": "sum(payback_no_subsidy)",
+                      "expression": "SUM(`payback_no_subsidy`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "Payback without subsidy by taluka"
+              },
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "taluka",
+                  "displayName": "taluka",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(payback_no_subsidy)",
+                  "displayName": "payback_no_subsidy",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "taluka",
+                  "displayName": "taluka",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 14,
+            "width": 6,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "diesel-cost-bar",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "c686ce0b",
+                  "fields": [
+                    {
+                      "name": "taluka",
+                      "expression": "`taluka`"
+                    },
+                    {
+                      "name": "sum(annual_diesel_cost)",
+                      "expression": "SUM(`annual_diesel_cost`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "Annual diesel cost by taluka"
+              },
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "taluka",
+                  "displayName": "taluka",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(annual_diesel_cost)",
+                  "displayName": "annual_diesel_cost",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "taluka",
+                  "displayName": "taluka",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 14,
+            "width": 6,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "payback-years-bar",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "c686ce0b",
+                  "fields": [
+                    {
+                      "name": "taluka",
+                      "expression": "`taluka`"
+                    },
+                    {
+                      "name": "sum(payback_years)",
+                      "expression": "SUM(`payback_years`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "Payback years by taluka (with subsidy)"
+              },
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "taluka",
+                  "displayName": "taluka",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(payback_years)",
+                  "displayName": "payback_years",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "taluka",
+                  "displayName": "taluka",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 4,
+            "width": 6,
+            "height": 6
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}
