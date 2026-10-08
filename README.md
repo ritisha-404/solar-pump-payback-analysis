@@ -8,7 +8,7 @@ This is an illustrative payback model. Please refrain from taking all details wi
 
 ## Objective
 
-The dashboard estimates and illusrates:
+The dashboard estimates and illustrates:
 
 - Solar energy generation
 - Solar energy coverage of pump demand
