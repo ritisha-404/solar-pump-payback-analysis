@@ -8,7 +8,7 @@ This is an illustrative payback model. Please refrain from taking all details wi
 
 ## Objective
 
-The dashboard estimates and ilusrates:
+The dashboard estimates and illusrates:
 
 - Solar energy generation
 - Solar energy coverage of pump demand
@@ -29,7 +29,6 @@ over four talukas in Pune:
 Solar radiation data is obtained from the **NASA POWER API** and used to
 estimate solar energy generation for the selected locations.
 
-## Dashboard
 
 
 
