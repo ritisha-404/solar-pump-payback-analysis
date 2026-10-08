@@ -27,9 +27,9 @@
             "name": "83c4309d",
             "multilineTextboxSpec": {
               "lines": [
-                "# Solar pump payback by taluka, Pune district\n",
+                "## Solar pump payback by taluka, Pune district\n",
                 "\n",
-                "#### Illustrative model: solar pump (5 kWp) vs diesel pump. All cost inputs are assumptions, see README."
+                "Illustrative model: solar pump (5 kWp) vs diesel pump. All cost inputs are assumptions, see README."
               ]
             }
           },
